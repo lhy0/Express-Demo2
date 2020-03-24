@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页</title>
+    <%- include head %>
+  </head>
+  <body>
+    <%- include('bar', {username: username}) %>
+
+    <table border="1" cellpadding="0" cellspacing="0" class="article-list">
+      <thead>
+        <tr>
+          <th>序号</th>
+          <th>标题</th>
+          <th>日期</th>
+          <th>编辑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% articles.list.forEach((item, index) => { %>
+          <tr>
+            <td>
+              <%= (articles.page-1)*3 + index + 1 %>
+            </td>
+            <td>
+              <a href="/details.html?id=<%= item.id %>">
+                <%= item.title %>
+              </a>
+            </td>
+            <td><%= item.time %></td>
+            <td>
+              <a href="/write.html?id=<%= item.id %>">编辑</a>
+              <a href="/articles/delete?id=<%= item.id %>">删除</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <div class="page">
+      共计<%= articles.total %>条&nbsp;&nbsp;
+      <% for(var i=1; i<=articles.pages; i++) { %>
+        <a href="/?page=<%= i %>"><%= i %></a>
+      <% } %>
+    </div>
+  </body>
+</html>

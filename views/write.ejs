@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页</title>
+    <%- include head %>
+    <script type="text/javascript" src="javascripts/xheditor-1.2.2/jquery/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="javascripts/xheditor-1.2.2/xheditor-1.2.2.min.js"></script>
+    <script type="text/javascript" src="javascripts/xheditor-1.2.2/xheditor_lang/zh-cn.js"></script>
+  </head>
+  <body>
+    <form action="articles/add" method="post" class="article">
+      <input type="hidden" name="id" value="<%= article.id %>">
+      <input type="text" placeholder="请输入标题" name="title" value="<%= article.title %>"/>
+      <textarea id="test" name="content" class="xheditor" rows="12" cols="80" style="width: 100%">
+        <%= article.content %>
+      </textarea>
+      <% if (article.id) { %>
+        <input type="submit" value="修改">
+      <% } else { %>
+        <input type="submit" value="发布">
+      <% } %>
+    </form>
+  </body>
+  <script>
+    $('#test').xheditor({
+      tools:'full',
+      skin:'default',/* 
+      showBlocktag:true,
+      internalScript:false,
+      internalStyle:false,
+      width:300,
+      height:200,
+      fullscreen:true,
+      sourceMode:true,
+      forcePtag:true, */
+      upImgUrl:"/articles/upload",
+      upImgExt:"jpg,jpeg,gif,png",
+      html5Upload: false,
+      upMultipl: 1
+    });
+  </script>
+</html>
